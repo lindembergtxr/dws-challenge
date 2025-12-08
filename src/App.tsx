@@ -1,5 +1,11 @@
-function App() {
-  return <h1>Hello, World!</h1>
-}
+import { ThemeProvider } from 'styled-components'
 
-export default App
+import { theme } from './app.styles'
+
+export function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <h1>Hello, World!</h1>
+    </ThemeProvider>
+  )
+}
