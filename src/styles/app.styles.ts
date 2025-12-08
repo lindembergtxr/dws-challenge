@@ -1,3 +1,12 @@
+import type { DefaultTheme } from 'styled-components'
+
+export const devices: DefaultTheme['devices'] = {
+  mobile: '0px',
+  tablet: '768px',
+  desktop: '1024px',
+  widescreen: '1440px',
+} as const
+
 export const theme = {
   colors: {
     primary: {
@@ -24,6 +33,11 @@ export const theme = {
       extraDark: '#5E5F63',
       darkest: '#202122',
     },
+    backgorundBlob: {
+      primary: '#91A7E0',
+      secondary: '#F098BB',
+      accent: '#93E6E9',
+    },
   },
   fontSizes: {
     xs: '0.75rem',
@@ -43,4 +57,5 @@ export const theme = {
     semibold: 600,
     bold: 700,
   },
+  devices,
 } as const

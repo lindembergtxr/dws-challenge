@@ -27,6 +27,11 @@ declare module 'styled-components' {
         extraDark: string
         darkest: string
       }
+      backgorundBlob: {
+        primary: string
+        secondary: string
+        accent: string
+      }
     }
     fontSizes: {
       xs: string
@@ -45,6 +50,12 @@ declare module 'styled-components' {
       medium: number
       semibold: number
       bold: number
+    }
+    devices: {
+      mobile: string
+      tablet: string
+      desktop: string
+      widescreen: string
     }
   }
 }
