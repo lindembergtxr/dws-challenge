@@ -13,11 +13,12 @@ export function usePosts() {
   return { posts: (data ?? []).map(postExternalToInternal), isLoading, isError }
 }
 
-export function usePostDetails(id: string) {
+export function usePostDetails(id?: string | null) {
   const { data, isError, isLoading } = useQuery({
     queryKey: ['posts', id],
-    queryFn: () => getPostById(id),
+    queryFn: () => getPostById(id ?? ''),
     retry: 2,
+    enabled: !!id,
   })
 
   return { post: data, isLoading, isError }

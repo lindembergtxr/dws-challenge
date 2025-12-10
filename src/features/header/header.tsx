@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { Grid, SearchInput } from '@/components'
 import { media } from '@/styles'
+import Logo from '@/assets/dentsu_logo.png'
 
 const HeaderContainer = styled(Grid)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.lightest};
@@ -50,7 +51,7 @@ export function Header() {
 
   return (
     <HeaderContainer as="header">
-      {!isExpanded && <HeaderLogo alt="logo" src="./src/assets/dentsu_logo.png" />}
+      {!isExpanded && <HeaderLogo alt="logo" src={Logo} />}
 
       <HeaderSearch $isExpanded={isExpanded}>
         <SearchInput isExpanded={isExpanded} setExpanded={(value) => setIsExpanded(value)} />

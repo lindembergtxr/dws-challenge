@@ -6,6 +6,7 @@ import { useDynamicClamp } from '@/hooks'
 import { parsePostDate } from './posts.utils'
 import type { InternalPost } from './posts.types'
 import * as Styles from './postCard.styles'
+import { useNavigate } from 'react-router-dom'
 
 type PostCardProps = {
   post: InternalPost
@@ -15,9 +16,15 @@ export function PostCard({ post }: PostCardProps) {
 
   useDynamicClamp(contentRef)
 
+  const navigate = useNavigate()
+
+  function openPost() {
+    navigate(`/posts/${post.id}`)
+  }
+
   return (
     <Card>
-      <Styles.PostCardWrapper>
+      <Styles.PostCardWrapper onClick={() => openPost()}>
         <Styles.PostCardImage src={post.thumbnailUrl} alt={post.id} />
 
         <Styles.PostCardContainer>
