@@ -1,4 +1,4 @@
-import { devices } from './app.styles'
+import { devices } from './theme'
 
 export const media = {
   mobile: `@media (min-width: ${devices.mobile})`,
