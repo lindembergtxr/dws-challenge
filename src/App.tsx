@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { theme, GlobalStyle } from '@/styles'
-import { BackgroundBlur } from '@/components'
+import { BackgroundBlur, MainLayout } from '@/components'
 import { HomePage } from '@/pages'
 
 const queryClient = new QueryClient()
@@ -18,7 +18,9 @@ export function App() {
           <BackgroundBlur />
 
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />} />
+            </Route>
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

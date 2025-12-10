@@ -16,7 +16,7 @@ const StyledButton = styled(AriaButton)`
   height: 2.5rem;
   border: none;
   color: ${({ theme }) => theme.colors.neutral.lightest};
-  background-color: ${({ theme }) => theme.colors.secondary.medium};
+  background-color: ${({ theme }) => theme.colors.primary.light};
 
   &:focus,
   &:hover {
