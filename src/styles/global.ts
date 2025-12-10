@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     position: relative;
     width: 100vw;
-    min-height: 400vh;
+    min-height: 100vh;
     font-family: 'Open Sans', sans-serif;
     background-color: white;
   }

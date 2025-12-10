@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { theme, GlobalStyle } from '@/styles'
-import { BackgroundBlur, MainLayout } from '@/components'
+import { MainLayout } from '@/components'
 import { HomePage } from '@/pages'
 
 const queryClient = new QueryClient()
@@ -15,7 +15,6 @@ export function App() {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <BackgroundBlur />
 
           <Routes>
             <Route element={<MainLayout />}>
