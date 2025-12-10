@@ -30,22 +30,34 @@ const Typography = {
   caption: styled.p<{ weight?: keyof DefaultTheme['fontWeight'] }>`
     font-size: ${({ theme }) => theme.fontSizes.xs};
     font-weight: ${({ theme, weight }) => theme.fontWeight[weight ?? 'regular']};
-    line-height: ${({ theme }) => theme.lineHeight.lg};
+    line-height: ${({ theme }) => theme.lineHeight.base};
   `,
 } as const
 
-type TypographyComponent = React.ElementType<{
-  children: React.ReactNode
-  weight?: 'bold' | 'semibold'
-}>
+type TypographyMap = {
+  h1: typeof Typography.h1
+  h2: typeof Typography.h2
+  h3: typeof Typography.h3
+  bodyLarge: typeof Typography.bodyLarge
+  bodySmall: typeof Typography.bodySmall
+  caption: typeof Typography.caption
+}
+
+const typedTypography = Typography as unknown as TypographyMap
 
 type TextProps = {
+  ref?: React.RefObject<HTMLHeadingElement | HTMLParagraphElement | null>
   variant: keyof typeof Typography
   weight?: 'bold' | 'semibold'
+  className?: string
   children: ReactNode
 }
-export function Text({ variant, weight, children }: TextProps) {
-  const Comp: TypographyComponent = Typography[variant]
+export function Text({ ref, variant, weight, className, children }: TextProps) {
+  const Comp = typedTypography[variant]
 
-  return <Comp weight={weight}>{children}</Comp>
+  return (
+    <Comp ref={ref} weight={weight} className={className}>
+      {children}
+    </Comp>
+  )
 }
