@@ -2,10 +2,9 @@ import styled from 'styled-components'
 import { MdOutlineArrowBack } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { usePostDetails } from '@/features/posts/posts.hooks'
 import { Button, Grid } from '@/components'
+import { usePostDetails, PostContent } from '@/features/posts'
 import { media } from '@/styles'
-import { AuthorInfo } from '@/features/authors/authorInfo'
 
 const PostDetailsContainer = styled(Grid)`
   padding-top: 20px;
@@ -28,13 +27,16 @@ const PostDetailsBack = styled.div`
 const PostDetailsContent = styled.div`
   grid-column: 1 / span 4;
   grid-row: 2;
+  margin-top: 24px;
 
   ${media.tablet} {
+    margin-top: 0px;
     grid-row: 1;
     grid-column: 3 / span 6;
   }
 
   ${media.desktop} {
+    margin-top: 0px;
     grid-row: 1;
     grid-column: 3 / span 10;
   }
@@ -64,9 +66,7 @@ export function PostDetailsPage() {
       <PostDetailsContent
         style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 8, width: '100%' }}
       >
-        <div>
-          <AuthorInfo author={post?.author} createdAt={post.createdAt} />
-        </div>
+        <PostContent post={post} />
       </PostDetailsContent>
     </PostDetailsContainer>
   )

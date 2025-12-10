@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Card, Chip, Text } from '@/components'
 import { useDynamicClamp } from '@/hooks'
@@ -6,7 +7,6 @@ import { useDynamicClamp } from '@/hooks'
 import { parsePostDate } from './posts.utils'
 import type { InternalPost } from './posts.types'
 import * as Styles from './postCard.styles'
-import { useNavigate } from 'react-router-dom'
 
 type PostCardProps = {
   post: InternalPost
@@ -35,9 +35,7 @@ export function PostCard({ post }: PostCardProps) {
           </Styles.PostCardHeader>
 
           <Styles.PostCardContent>
-            <Styles.PostCardContentTitle variant="h3">
-              {post.title} dasd asas d sa lorem ipsum
-            </Styles.PostCardContentTitle>
+            <Styles.PostCardContentTitle variant="h3">{post.title}</Styles.PostCardContentTitle>
 
             <Styles.PostCardContentBody ref={contentRef} variant="bodySmall">
               {post.content}
