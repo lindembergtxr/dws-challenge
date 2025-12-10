@@ -1,3 +1,4 @@
+export * from './avatar'
 export * from './backgroundBlur'
 export * from './button'
 export * from './card'

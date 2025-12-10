@@ -12,7 +12,7 @@ const StyledButton = styled(AriaButton)<{ $variant: ButtonVariant; $width?: 'ful
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 0.875rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 999px;
   cursor: pointer;
   width: ${({ $width }) => ($width === 'full' ? '100%' : 'unset')};
