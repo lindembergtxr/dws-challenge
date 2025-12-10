@@ -3,7 +3,7 @@ import { Button as AriaButton } from 'react-aria-components'
 import type { IconType } from 'react-icons'
 import styled from 'styled-components'
 
-import { Text } from '../styles/typography'
+import { Text } from './typography'
 
 type ButtonVariant = 'primary' | 'secondary'
 

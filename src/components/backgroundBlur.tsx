@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { media } from '../styles/media'
+
+import { media } from '@/styles/media'
 
 const baseGradient = (color: string, position: string, spread: string) =>
   `radial-gradient(circle at ${position}, ${color} 0%, transparent ${spread})`
