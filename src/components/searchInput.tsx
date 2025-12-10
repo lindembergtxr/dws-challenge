@@ -8,13 +8,13 @@ import { devices, media } from '@/styles'
 
 import { IconButton } from './iconButton'
 
-const SearchInputContainer = styled.div<{ isExpanded: boolean }>`
+const SearchInputContainer = styled.div<{ $isExpanded: boolean }>`
   border: 1px solid ${({ theme }) => theme.colors.neutral.lightest};
   color: ${({ theme }) => theme.colors.neutral.extraDark};
   background-color: white;
-  padding: ${({ isExpanded }) => (isExpanded ? '0 8px' : '0px')};
+  padding: ${({ $isExpanded }) => ($isExpanded ? '0 8px' : '0px')};
   height: 40px;
-  width: ${({ isExpanded }) => (isExpanded ? '100%' : '40px')};
+  width: ${({ $isExpanded }) => ($isExpanded ? '100%' : '40px')};
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -109,7 +109,7 @@ export function SearchInput({ isExpanded, setExpanded, onSearch }: SearchInputPr
   }, [isMobile, isExpanded])
 
   return (
-    <SearchInputContainer isExpanded={!!isExpanded}>
+    <SearchInputContainer $isExpanded={!!isExpanded}>
       {isMobile && isExpanded && (
         <CloseButton onClick={reset}>
           <MdOutlineArrowBack />

@@ -7,7 +7,7 @@ import { Text } from './typography'
 
 type ButtonVariant = 'primary' | 'secondary'
 
-const StyledButton = styled(AriaButton)<{ variant: ButtonVariant; width?: 'full' | 'fit' }>`
+const StyledButton = styled(AriaButton)<{ $variant: ButtonVariant; $width?: 'full' | 'fit' }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -15,21 +15,21 @@ const StyledButton = styled(AriaButton)<{ variant: ButtonVariant; width?: 'full'
   padding: 0.875rem 1rem;
   border-radius: 999px;
   cursor: pointer;
-  width: ${({ width }) => (width === 'full' ? '100%' : 'unset')};
-  border: ${({ theme, variant }) =>
-    variant === 'primary' ? 'none' : `1px solid ${theme.colors.secondary.light}`};
-  color: ${({ theme, variant }) =>
-    variant === 'primary' ? theme.colors.neutral.lightest : theme.colors.secondary.light};
-  background-color: ${({ theme, variant }) =>
-    variant === 'primary' ? theme.colors.secondary.medium : 'transparent'};
+  width: ${({ $width }) => ($width === 'full' ? '100%' : 'unset')};
+  border: ${({ theme, $variant }) =>
+    $variant === 'primary' ? 'none' : `1px solid ${theme.colors.secondary.light}`};
+  color: ${({ theme, $variant }) =>
+    $variant === 'primary' ? theme.colors.neutral.lightest : theme.colors.secondary.light};
+  background-color: ${({ theme, $variant }) =>
+    $variant === 'primary' ? theme.colors.secondary.medium : 'transparent'};
 
   &:hover {
-    background-color: ${({ theme, variant }) =>
-      variant === 'primary' ? theme.colors.secondary.dark : 'transparent'};
-    border: ${({ theme, variant }) =>
-      variant === 'primary' ? 'none' : `1px solid ${theme.colors.secondary.dark}`};
-    color: ${({ theme, variant }) =>
-      variant === 'primary' ? theme.colors.neutral.lightest : theme.colors.secondary.dark};
+    background-color: ${({ theme, $variant }) =>
+      $variant === 'primary' ? theme.colors.secondary.dark : 'transparent'};
+    border: ${({ theme, $variant }) =>
+      $variant === 'primary' ? 'none' : `1px solid ${theme.colors.secondary.dark}`};
+    color: ${({ theme, $variant }) =>
+      $variant === 'primary' ? theme.colors.neutral.lightest : theme.colors.secondary.dark};
   }
 
   > svg {
@@ -48,7 +48,7 @@ type ButtonProps = ComponentProps<typeof AriaButton> & {
 }
 export function Button({ variant, width, Icon, children, ...props }: ButtonProps) {
   return (
-    <StyledButton variant={variant} width={width} {...props}>
+    <StyledButton $variant={variant} $width={width} {...props}>
       {Icon && <Icon />}
       <Text variant="bodyLarge" weight="semibold">
         {children}

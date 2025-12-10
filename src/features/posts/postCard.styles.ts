@@ -7,6 +7,10 @@ export const PostCardWrapper = styled.div`
   flex-direction: column;
   height: 425px;
   width: 314px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export const PostCardImage = styled.img`

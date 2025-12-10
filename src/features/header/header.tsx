@@ -27,8 +27,8 @@ const HeaderLogo = styled.img`
   }
 `
 
-const HeaderSearch = styled.div<{ isExpanded: boolean }>`
-  grid-column: ${({ isExpanded }) => (isExpanded ? '1 / span 4' : '2 / span 3')};
+const HeaderSearch = styled.div<{ $isExpanded: boolean }>`
+  grid-column: ${({ $isExpanded }) => ($isExpanded ? '1 / span 4' : '2 / span 3')};
   align-self: center;
   justify-self: end;
   width: 100%;
@@ -37,7 +37,7 @@ const HeaderSearch = styled.div<{ isExpanded: boolean }>`
   align-items: center;
 
   ${media.tablet} {
-    grid-column: ${({ isExpanded }) => (isExpanded ? '1 / span 8' : '4 / span 5')};
+    grid-column: ${({ $isExpanded }) => ($isExpanded ? '1 / span 8' : '4 / span 5')};
   }
 
   ${media.desktop} {
@@ -52,7 +52,7 @@ export function Header() {
     <HeaderContainer as="header">
       {!isExpanded && <HeaderLogo alt="logo" src="./src/assets/dentsu_logo.png" />}
 
-      <HeaderSearch isExpanded={isExpanded}>
+      <HeaderSearch $isExpanded={isExpanded}>
         <SearchInput isExpanded={isExpanded} setExpanded={(value) => setIsExpanded(value)} />
       </HeaderSearch>
     </HeaderContainer>
