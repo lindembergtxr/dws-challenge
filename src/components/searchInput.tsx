@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type KeyboardEvent } from 'react'
 import { Button } from 'react-aria-components'
 import styled from 'styled-components'
 import { MdOutlineArrowBack, MdOutlineClose, MdOutlineSearch } from 'react-icons/md'
@@ -106,6 +106,10 @@ export function SearchInput({
     setExpanded(false)
   }
 
+  function handleKeyDown(evt: KeyboardEvent<HTMLInputElement>) {
+    if (evt.key === 'Enter') onSearch()
+  }
+
   useEffect(() => {
     if (!isMobile) setExpanded(false)
   }, [isMobile, setExpanded])
@@ -130,6 +134,7 @@ export function SearchInput({
           placeholder="Search"
           value={value}
           onChange={(evt) => setValue(evt.target.value)}
+          onKeyDown={handleKeyDown}
         />
       )}
 

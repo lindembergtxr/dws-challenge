@@ -5,6 +5,7 @@ import { Grid, SearchInput } from '@/components'
 import { usePostsContext } from '@/features/posts'
 import { media } from '@/styles'
 import Logo from '@/assets/dentsu_logo.png'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const HeaderContainer = styled(Grid)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.lightest};
@@ -53,8 +54,12 @@ export function Header() {
 
   const { search, setSearch } = usePostsContext()
 
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
   function onSearch() {
     setSearch(searchInput)
+    if (pathname !== '/posts') navigate('/posts')
   }
 
   useLayoutEffect(() => {

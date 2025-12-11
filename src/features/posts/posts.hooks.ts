@@ -26,15 +26,13 @@ export function usePosts({ sort, search, authors, categories }: UsePostsArgs) {
     .map(postExternalToInternal)
     .filter((post) => {
       if (normalizedSearch) {
-        const haystack = `${post.title} ${post.content}`.toLowerCase()
-
-        if (!haystack.includes(normalizedSearch)) return false
+        if (!post.title.toLowerCase().includes(normalizedSearch)) return false
       }
       if (authors && authors.length > 0) {
         if (!authors.some((a) => a.id === post.author.id)) return false
       }
       if (categories && categories.length > 0) {
-        if (!categories.some((c) => post.categories.some((pc) => pc.id === c.id))) {
+        if (!categories.every((c) => post.categories.some((pc) => pc.id === c.id))) {
           return false
         }
       }

@@ -7,10 +7,10 @@ import type { Author } from '../authors'
 export type PostsContextType = {
   sort: SortMode
   setSort: Dispatch<SetStateAction<SortMode>>
-  categories: Category[]
-  setCategories: Dispatch<SetStateAction<Category[]>>
-  authors: Author[]
-  setAuthors: Dispatch<SetStateAction<Author[]>>
+  selectedCategories: Category[]
+  setSelectedCategories: Dispatch<SetStateAction<Category[]>>
+  selectedAuthors: Author[]
+  setSelectedAuthors: Dispatch<SetStateAction<Author[]>>
   search: string
   setSearch: Dispatch<SetStateAction<string>>
 }

@@ -8,13 +8,22 @@ import { Context } from './posts.context'
 
 export const PostsContextProvider = ({ children }: PropsWithChildren) => {
   const [sort, setSort] = useState<SortMode>('newest')
-  const [categories, setCategories] = useState<Category[]>([])
-  const [authors, setAuthors] = useState<Author[]>([])
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([])
+  const [selectedAuthors, setSelectedAuthors] = useState<Author[]>([])
   const [search, setSearch] = useState('')
 
   return (
     <Context
-      value={{ search, setSearch, sort, setSort, authors, setAuthors, categories, setCategories }}
+      value={{
+        search,
+        setSearch,
+        sort,
+        setSort,
+        selectedAuthors,
+        setSelectedAuthors,
+        selectedCategories,
+        setSelectedCategories,
+      }}
     >
       {children}
     </Context>
