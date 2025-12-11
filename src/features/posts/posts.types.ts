@@ -1,6 +1,8 @@
 import type { Author } from '@/features/authors'
 import type { Category } from '@/features/categories'
 
+export type SortMode = 'newest' | 'oldest'
+
 export interface ExternalPost {
   id: string
   authorId: string

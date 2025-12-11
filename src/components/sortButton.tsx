@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 import { Button } from 'react-aria-components'
 import { LuArrowDownUp } from 'react-icons/lu'
 
 import { Text } from './typography'
+import { usePostsContext } from '@/features/posts/posts.context'
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -40,15 +40,15 @@ const StyledButton = styled(Button)`
 `
 
 export function SortButton() {
-  const [mode, setMode] = useState<'newest' | 'oldest'>('newest')
+  const { sort, setSort } = usePostsContext()
 
   function toggleMode() {
-    setMode((prev) => (prev === 'newest' ? 'oldest' : 'newest'))
+    setSort((prev) => (prev === 'newest' ? 'oldest' : 'newest'))
   }
 
   return (
     <StyledButton onClick={toggleMode}>
-      <Text variant="caption">{mode === 'newest' ? 'Newest' : 'Oldest'} first</Text>
+      <Text variant="caption">{sort === 'newest' ? 'Newest' : 'Oldest'} first</Text>
       <LuArrowDownUp />
     </StyledButton>
   )
