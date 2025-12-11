@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# DWS Technical Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an implementation of the DWS Blog based on the provided designs.
+The goal is to deliver a responsive, mobile-first interface while maintaining pixel-perfect fidelity to the layouts.
 
-Currently, two official plugins are available:
+The assignment requested the use of any preferred CSS approach (SASS/SCSS, styled-components, or pure CSS), while avoiding UI frameworks such as Material or Tailwind, in order to showcase styling and layout skills.
+Where the mobile and desktop designs presented conflicting patterns, decisions were made to maintain consistency, preserve usability, and ensure a coherent user experience. These choices are documented in the code and comments.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Setup and installation
 
-## React Compiler
+### Clone the repo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Create .env file
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+VITE_BACKEND_URL=<backend url>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#### Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+#### Run
+
+```bash
+npm run dev
+```
+
+### Notes on design decisions
+
+Some design elements in the mobile and desktop versions differed in structure or behavior.
+In these cases, I aligned the implementation with a mobile-first approach and selected the pattern that provided the most consistent and usable experience across breakpoints.
+
+Any adjustments or additions (such as providing expected interactions that were missing from the mockups) were made with the intention of staying faithful to the design philosophy while ensuring functional UI behavior.
+
+#### Assumptions
+
+- The number of category tags is treated as dynamic. The UI supports overflow via horizontal scrolling and hides the native scrollbar to maintain layout integrity. If no categories are provided, the section is not rendered.
+
+- The background color of the card was not included in the given color palette. Used neutral.lightest instead.
+
+- The border color of the card was not included in the given color palette. Used neutral.extraLight instead.
+
+- The color of the dot in the card was not included in the given color palette. Used secondary.medium instead.
+
+- The color of the text in the card was not included in the given color palette. Used neutral.darkest instead.
+
+- Limited the card title to a maximum of two lines.
+
+- The number of lines of the card content text is determined by the available height.
+
+- Added a fallback for the author name. Used “Unknown author.”
+
+- Since it wasn’t defined, added tablet and widescreen grid settings.
+
+- The header’s vertical padding was not defined, so I used 12px.
+
+- The Avatar size was not specified. Used 56px.
+
+- The colors of the author name and date on the post details page were not defined. Used neutral.darkest and neutral.medium respectively.
+
+- The author.profilePicture provided in the API includes transparent padding and uneven dimensions. To maintain consistent display, images are shown inside a circle with object-fit: cover; the original image file is not modified. For full accuracy, the source images would need to be adjusted directly, as CSS/JS alone cannot fully correct uneven padding in every case.
+
+- The design files present the cards with a fixed width arranged in three columns. However, this setup does not hold on smaller screens, where the fixed width causes the layout to break into uneven column counts. To maintain visual consistency and avoid layout distortion, the card width becomes flexible below a certain breakpoint. This responsive behavior preserves the overall design intent while adapting the card distribution to the available screen space.
+
+- The mobile filters were not explicit regarding which version to implement or how each version should behave. Because of this, instead of selecting one, I implemented a combined approach that maintains a good user experience.
+
+- Some interaction details were not fully specified in the provided components, such as empty states, full user flows, or navigation behavior. To ensure a smooth experience, I made decisions based on common usability practices.
+
+- Certain design elements did not adapt well to the available space on mobile; in those cases, I prioritized maintaining a usable and coherent layout without altering the overall visual intent.
+
+- In the absence of clear instructions on how the modal should be closed or how the flow should behave, I adopted a standard interaction pattern to allow users to exit the filter selection interface.
+
+- Since some details were undefined, I interpreted the design as faithfully as possible without compromising responsiveness or interaction clarity.
