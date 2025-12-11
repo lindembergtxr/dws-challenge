@@ -12,9 +12,10 @@ type PostCardProps = {
   post: InternalPost
 }
 export function PostCard({ post }: PostCardProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const contentRef = useRef<HTMLHeadingElement | HTMLParagraphElement | null>(null)
 
-  useDynamicClamp(contentRef)
+  useDynamicClamp(containerRef, contentRef)
 
   const navigate = useNavigate()
 
@@ -37,8 +38,10 @@ export function PostCard({ post }: PostCardProps) {
           <Styles.PostCardContent>
             <Styles.PostCardContentTitle variant="h3">{post.title}</Styles.PostCardContentTitle>
 
-            <Styles.PostCardContentBody ref={contentRef} variant="bodySmall">
-              {post.content}
+            <Styles.PostCardContentBody ref={containerRef}>
+              <Text ref={contentRef} variant="bodySmall">
+                {post.content}
+              </Text>
             </Styles.PostCardContentBody>
           </Styles.PostCardContent>
 

@@ -1,17 +1,35 @@
 import { useLayoutEffect, type RefObject } from 'react'
 
-export function useDynamicClamp(ref: RefObject<HTMLHeadElement | HTMLParagraphElement | null>) {
+export function useDynamicClamp(
+  containerRef: RefObject<HTMLDivElement | null>,
+  contentRef: RefObject<HTMLHeadElement | HTMLParagraphElement | null>,
+) {
   useLayoutEffect(() => {
-    const el = ref.current
+    const div = containerRef.current
+    const text = contentRef.current
 
-    if (!el) return
+    if (!text || !div) return
 
-    const totalHeight = el.clientHeight
+    function update() {
+      if (!text || !div) return
 
-    const lineHeight = parseFloat(getComputedStyle(el).lineHeight)
+      const totalHeight = div.clientHeight
 
-    const maxLines = Math.floor(totalHeight / lineHeight)
+      const lineHeight = parseFloat(getComputedStyle(text).lineHeight)
+      const maxLines = Math.floor(totalHeight / lineHeight)
+      text.style.webkitLineClamp = String(maxLines > 0 ? maxLines : 1)
+    }
 
-    el.style.webkitLineClamp = String(maxLines > 0 ? maxLines : 1)
-  }, [ref])
+    update()
+
+    const observer = new ResizeObserver(update)
+    observer.observe(div)
+
+    window.addEventListener('resize', update)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', update)
+    }
+  }, [contentRef, containerRef])
 }

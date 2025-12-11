@@ -1,15 +1,20 @@
 import styled from 'styled-components'
 
 import { Text } from '@/components/typography'
+import { media } from '@/styles'
 
 export const PostCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 425px;
-  width: 314px;
+  width: 100%;
 
   &:hover {
     cursor: pointer;
+  }
+
+  ${media.tablet} {
+    width: 314px;
   }
 `
 
@@ -59,13 +64,20 @@ export const PostCardContentTitle = styled(Text)`
   flex-shrink: 0;
 `
 
-export const PostCardContentBody = styled(Text)`
+export const PostCardContentBody = styled.div`
   color: ${({ theme }) => theme.colors.neutral.darkest};
-  min-height: 0;
   width: 100%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+  flex: 1;
   overflow: hidden;
+
+  > h1,
+  h2,
+  h3,
+  p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 `
 
 export const PostCardHeader = styled.div`
