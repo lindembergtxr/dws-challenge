@@ -2,10 +2,10 @@ import styled from 'styled-components'
 
 import { Text } from '@/components'
 import { AuthorInfo } from '@/features/authors'
-
-import type { InternalPost } from './posts.types'
 import { useMediaQuery } from '@/hooks'
 import { devices } from '@/styles'
+
+import type { InternalPost } from './posts.types'
 
 const PostContentContainer = styled.div`
   display: flex;

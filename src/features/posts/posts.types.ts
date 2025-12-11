@@ -1,5 +1,5 @@
-import type { Author } from '../authors/authors.types'
-import type { Category } from '../categories/categories.types'
+import type { Author } from '@/features/authors'
+import type { Category } from '@/features/categories'
 
 export interface ExternalPost {
   id: string

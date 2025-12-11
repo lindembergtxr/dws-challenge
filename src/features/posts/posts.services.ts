@@ -1,4 +1,4 @@
-import { apiRequest } from '../../utils/axios'
+import { apiRequest } from '@/utils'
 
 import type { ExternalPost } from './posts.types'
 

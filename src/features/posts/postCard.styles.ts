@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Text } from '@/components/typography'
+import { Text } from '@/components'
 import { media } from '@/styles'
 
 export const PostCardWrapper = styled.div`
