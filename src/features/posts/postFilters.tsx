@@ -1,11 +1,13 @@
+import { useLayoutEffect, useState } from 'react'
 import styled from 'styled-components'
+import { LuSlidersHorizontal } from 'react-icons/lu'
 
 import { useAuthors, type Author } from '@/features/authors'
 import { useCategories, type Category } from '@/features/categories'
 import { Button, Text } from '@/components'
-import { LuSlidersHorizontal } from 'react-icons/lu'
+
 import { usePostsContext } from './posts.context'
-import { useLayoutEffect, useState } from 'react'
+import { PostFiltersList } from './postFiltersList'
 
 const PostFiltersContainer = styled.div`
   height: fit-content;
@@ -50,50 +52,6 @@ const PostFiltersContentSection = styled.div`
   padding-left: 16px;
 `
 
-const PostFiltersContentList = styled.ul`
-  width: 100%;
-  overflow: scroll;
-  height: 240px;
-  min-height: 0;
-  padding-right: 16px;
-`
-
-const PostFiltersContentListItemContainer = styled.li`
-  display: flex;
-  flex-direction: column;
-  padding: 4px 0;
-  width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.lightest};
-`
-
-const PostFiltersContentListItem = styled.li<{ $selected: boolean }>`
-  width: 100%;
-  padding: 11px 8px;
-
-  color: ${({ theme, $selected }) =>
-    $selected ? theme.colors.accent.dark : theme.colors.neutral.darkest};
-
-  background-color: ${({ theme, $selected }) =>
-    $selected ? `${theme.colors.accent.light}0D` : 'transparent'};
-
-  border: 1px solid
-    ${({ theme, $selected }) =>
-      $selected ? theme.colors.accent.dark : theme.colors.neutral.extraLight};
-
-  border-radius: 8px;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent.dark};
-    cursor: pointer;
-  }
-
-  p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`
-
 export function PostFilters() {
   const { authors } = useAuthors()
   const { categories } = useCategories()
@@ -103,32 +61,6 @@ export function PostFilters() {
 
   const [localCategories, setCategories] = useState<Category[]>([])
   const [localAuthors, setAuthors] = useState<Author[]>([])
-
-  console.log(authors, categories)
-
-  function toggleAuthor(author: Author) {
-    setAuthors((prev) => {
-      const temp = [...prev]
-      const index = temp.findIndex((a) => a.id === author.id)
-
-      if (index === -1) temp.push(author)
-      else temp.splice(index, 1)
-
-      return temp
-    })
-  }
-
-  function toggleCategory(category: Category) {
-    setCategories((prev) => {
-      const temp = [...prev]
-      const index = temp.findIndex((c) => c.id === category.id)
-
-      if (index === -1) temp.push(category)
-      else temp.splice(index, 1)
-
-      return temp
-    })
-  }
 
   function applyFilters() {
     setSelectedAuthors(localAuthors)
@@ -160,18 +92,11 @@ export function PostFilters() {
             Categories
           </Text>
 
-          <PostFiltersContentList>
-            {categories.map((category) => (
-              <PostFiltersContentListItemContainer key={category.id}>
-                <PostFiltersContentListItem
-                  $selected={localCategories.some((cat) => cat.id === category.id)}
-                  onClick={() => toggleCategory(category)}
-                >
-                  <Text variant="bodySmall">{category.name}</Text>
-                </PostFiltersContentListItem>
-              </PostFiltersContentListItemContainer>
-            ))}
-          </PostFiltersContentList>
+          <PostFiltersList<Category>
+            values={categories}
+            selectedValues={localCategories}
+            onChange={setCategories}
+          />
         </PostFiltersContentSection>
 
         <PostFiltersContentSection>
@@ -179,18 +104,11 @@ export function PostFilters() {
             Authors
           </Text>
 
-          <PostFiltersContentList>
-            {authors.map((author) => (
-              <PostFiltersContentListItemContainer key={author.id}>
-                <PostFiltersContentListItem
-                  $selected={localAuthors.some((auth) => auth.id === author.id)}
-                  onClick={() => toggleAuthor(author)}
-                >
-                  <Text variant="bodySmall">{author.name}</Text>
-                </PostFiltersContentListItem>
-              </PostFiltersContentListItemContainer>
-            ))}
-          </PostFiltersContentList>
+          <PostFiltersList<Author>
+            values={authors}
+            selectedValues={localAuthors}
+            onChange={setAuthors}
+          />
         </PostFiltersContentSection>
 
         <Button variant="primary" onClick={applyFilters}>

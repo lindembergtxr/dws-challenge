@@ -3,6 +3,11 @@ import type { Category } from '@/features/categories'
 
 export type SortMode = 'newest' | 'oldest'
 
+export type GenericItem = {
+  id: string
+  name: string
+}
+
 export interface ExternalPost {
   id: string
   authorId: string

@@ -1,7 +1,12 @@
 import styled from 'styled-components'
 
 import { SortButton, Text } from '@/components'
+import { useCategories } from '@/features/categories'
+import { useAuthors } from '@/features/authors'
 import { media } from '@/styles'
+
+import { PostFiltersChip } from './postFiltersChip'
+import { usePostsContext } from './posts.context'
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -20,6 +25,19 @@ const HeaderTitle = styled(Text)`
 
   ${media.tablet} {
     display: flex;
+  }
+`
+
+const HeaderFilters = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  flex: 1;
+  width: 100%;
+
+  ${media.tablet} {
+    display: none;
   }
 `
 
@@ -43,11 +61,33 @@ const HeaderSort = styled.div`
 `
 
 export function PostListHeader() {
+  const { categories } = useCategories()
+  const { authors } = useAuthors()
+
+  const { selectedAuthors, selectedCategories, setSelectedAuthors, setSelectedCategories } =
+    usePostsContext()
+
   return (
     <HeaderContainer>
       <HeaderTitle variant="h2" weight="bold">
         DWS blog
       </HeaderTitle>
+
+      <HeaderFilters>
+        <PostFiltersChip
+          title="Category"
+          values={categories}
+          selected={selectedCategories}
+          onSubmit={setSelectedCategories}
+        />
+
+        <PostFiltersChip
+          title="Author"
+          values={authors}
+          selected={selectedAuthors}
+          onSubmit={setSelectedAuthors}
+        />
+      </HeaderFilters>
 
       <HeaderSort>
         <Text variant="caption" weight="semibold">

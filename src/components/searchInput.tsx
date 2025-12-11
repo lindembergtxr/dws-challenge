@@ -96,18 +96,16 @@ export function SearchInput({
 
   const isMobile = useMediaQuery(`(max-width: calc(${devices.tablet} - 1px))`)
 
-  function click() {
+  function submit() {
     if (isMobile && !isExpanded) setExpanded(true)
-    else onSearch()
-  }
-
-  function reset() {
-    setValue('')
-    setExpanded(false)
+    else {
+      onSearch()
+      setExpanded(false)
+    }
   }
 
   function handleKeyDown(evt: KeyboardEvent<HTMLInputElement>) {
-    if (evt.key === 'Enter') onSearch()
+    if (evt.key === 'Enter') submit()
   }
 
   useEffect(() => {
@@ -121,7 +119,7 @@ export function SearchInput({
   return (
     <SearchInputContainer $isExpanded={!!isExpanded}>
       {isMobile && isExpanded && (
-        <CloseButton onClick={reset}>
+        <CloseButton onClick={submit}>
           <MdOutlineArrowBack />
         </CloseButton>
       )}
@@ -144,7 +142,7 @@ export function SearchInput({
         </CloseButton>
       )}
 
-      {!isExpanded && <IconButton Icon={MdOutlineSearch} onClick={click} />}
+      {!isExpanded && <IconButton Icon={MdOutlineSearch} onClick={submit} />}
     </SearchInputContainer>
   )
 }
