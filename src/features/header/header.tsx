@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { Grid, SearchInput } from '@/components'
+import { usePostsContext } from '@/features/posts'
 import { media } from '@/styles'
 import Logo from '@/assets/dentsu_logo.png'
 
@@ -48,13 +49,33 @@ const HeaderSearch = styled.div<{ $isExpanded: boolean }>`
 
 export function Header() {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [searchInput, setSearchInput] = useState('')
+
+  const { search, setSearch } = usePostsContext()
+
+  function onSearch() {
+    setSearch(searchInput)
+  }
+
+  useLayoutEffect(() => {
+    if (search !== searchInput) {
+      setSearchInput(search)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search])
 
   return (
     <HeaderContainer as="header">
       {!isExpanded && <HeaderLogo alt="logo" src={Logo} />}
 
       <HeaderSearch $isExpanded={isExpanded}>
-        <SearchInput isExpanded={isExpanded} setExpanded={(value) => setIsExpanded(value)} />
+        <SearchInput
+          value={searchInput}
+          setValue={setSearchInput}
+          isExpanded={isExpanded}
+          setExpanded={(value) => setIsExpanded(value)}
+          onSearch={onSearch}
+        />
       </HeaderSearch>
     </HeaderContainer>
   )

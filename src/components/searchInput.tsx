@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Button } from 'react-aria-components'
 import styled from 'styled-components'
 import { MdOutlineArrowBack, MdOutlineClose, MdOutlineSearch } from 'react-icons/md'
@@ -79,20 +79,26 @@ const CloseButton = styled(Button)`
 `
 
 type SearchInputProps = {
+  value: string
+  setValue: (value: string) => void
   isExpanded?: boolean
   setExpanded: (value: boolean) => void
-  onSearch?: (search: string) => void
+  onSearch: () => void
 }
-export function SearchInput({ isExpanded, setExpanded, onSearch }: SearchInputProps) {
+export function SearchInput({
+  value,
+  setValue,
+  isExpanded,
+  setExpanded,
+  onSearch,
+}: SearchInputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const isMobile = useMediaQuery(`(max-width: calc(${devices.tablet} - 1px))`)
 
-  const [value, setValue] = useState('')
-
   function click() {
     if (isMobile && !isExpanded) setExpanded(true)
-    else if (value.length > 0) onSearch?.(value)
+    else onSearch()
   }
 
   function reset() {
