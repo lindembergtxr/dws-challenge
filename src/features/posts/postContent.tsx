@@ -3,14 +3,24 @@ import styled from 'styled-components'
 import { Text } from '@/components'
 import { AuthorInfo } from '@/features/authors'
 import { useMediaQuery } from '@/hooks'
-import { devices } from '@/styles'
+import { devices, media } from '@/styles'
 
 import type { InternalPost } from './posts.types'
+import { PostLatest } from './postLatest'
 
 const PostContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 16px;
+  padding-bottom: 64px;
+
+  ${media.tablet} {
+    padding-bottom: 80px;
+  }
+
+  ${media.desktop} {
+    padding-bottom: 120px;
+  }
 `
 
 export const PostContentTitle = styled(Text)`
@@ -55,6 +65,8 @@ export function PostContent({ post }: PostContentProps) {
       <PostContentImage alt="post thumbnail" src={post.thumbnailUrl} />
 
       <PostContentText variant="bodyLarge">{post.content}</PostContentText>
+
+      <PostLatest />
     </PostContentContainer>
   )
 }

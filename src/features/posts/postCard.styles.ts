@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { Text } from '@/components'
-import { media } from '@/styles'
 
 export const PostCardWrapper = styled.div`
   display: flex;
@@ -11,10 +10,6 @@ export const PostCardWrapper = styled.div`
 
   &:hover {
     cursor: pointer;
-  }
-
-  ${media.tablet} {
-    width: 314px;
   }
 `
 
@@ -88,6 +83,15 @@ export const PostCardHeader = styled.div`
   column-gap: 8px;
   height: 19px;
   width: 100%;
+  overflow: hidden;
+
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
+  }
 `
 
 export const PostCardHeaderDot = styled.div`
@@ -95,6 +99,7 @@ export const PostCardHeaderDot = styled.div`
   display: block;
   height: 5px;
   width: 5px;
+  min-width: 5px;
   border-radius: 2.5px;
 `
 

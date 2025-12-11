@@ -38,7 +38,7 @@ const PostDetailsContent = styled.div`
   ${media.desktop} {
     margin-top: 0px;
     grid-row: 1;
-    grid-column: 3 / span 10;
+    grid-column: 3 / span 9;
   }
 `
 
@@ -63,9 +63,7 @@ export function PostDetailsPage() {
         </Button>
       </PostDetailsBack>
 
-      <PostDetailsContent
-        style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 8, width: '100%' }}
-      >
+      <PostDetailsContent>
         <PostContent post={post} />
       </PostDetailsContent>
     </PostDetailsContainer>
